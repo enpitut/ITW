@@ -1,2 +1,2 @@
 # ITW
-IMAGINE THE WORLDのリポジトリ
+IMAGINE THE WORLDのリポジトリです。
