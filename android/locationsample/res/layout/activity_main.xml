@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+
+    <TextView
+        android:layout_width="122dp"
+        android:layout_height="32dp"
+        android:text="New Text"
+        android:id="@+id/text_view_wifi_latitude_value"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/text_view_wifi_longitude_value"
+        android:layout_below="@+id/text_view_wifi_latitude_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/text_view_wifi_accuracy_value"
+        android:layout_below="@+id/text_view_wifi_longitude_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/text_view_gps_latitude_value"
+        android:layout_below="@+id/text_view_wifi_accuracy_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="49dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/text_view_gps_longitude_value"
+        android:layout_below="@+id/text_view_gps_latitude_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/text_view_gps_accuracy_value"
+        android:layout_below="@+id/text_view_gps_longitude_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:focusableInTouchMode="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/text_view_wifi_altitude_value"
+        android:layout_alignRight="@+id/text_view_wifi_latitude_value"
+        android:layout_alignEnd="@+id/text_view_wifi_latitude_value"
+        android:layout_below="@+id/text_view_wifi_accuracy_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:focusableInTouchMode="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/text_view_gps_altitude_value"
+        android:layout_below="@+id/text_view_gps_accuracy_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WIFI"
+        android:id="@+id/button_wifi"
+        android:layout_below="@+id/text_view_gps_altitude_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="51dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GPS"
+        android:id="@+id/button_gps"
+        android:layout_alignTop="@+id/button_wifi"
+        android:layout_toRightOf="@+id/text_view_wifi_altitude_value"
+        android:layout_toEndOf="@+id/text_view_wifi_altitude_value" />
+</RelativeLayout>
