@@ -1,0 +1,102 @@
+package com.example.enpit_itw_esaka.myapplication2;
+
+import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.view.ActionProvider;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.WriteAbortedException;
+import java.util.Hashtable;
+
+import static android.support.v4.app.ActivityCompat.startActivity;
+
+//「ActionProvider」クラスを継承したクラスを作成する
+public class SampleActionProvider extends ActionProvider implements OnClickListener{
+    private Context mContext;
+    private Button btn;
+    private  LinearLayout linearLayout;
+    private PendingIntent  pendingintent;
+
+    //コンストラクタ
+    public SampleActionProvider(Context context){
+        super(context);
+        //コンテキストを保持する
+        mContext = context;
+    }
+
+    //アクションビュー生成時に呼ばれる
+    @Override
+    public View onCreateActionView() {
+        //「LayoutInflater」インスタンスを取得する
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+
+        //レイアウトファイル「sample_action_provider.xml」をインスタンス化する
+        View view = layoutInflater.inflate(R.layout.sample_action_provider, null);
+
+        // Buttonインスタンスを取得する
+        btn = (Button) view.findViewById(R.id.button);
+
+        //クイックリスナーをセットする
+        btn.setOnClickListener(this);
+        return view;
+    }
+
+    @Override
+    public void onClick(View v){
+/*
+        //QRコード作成時に実行するインテントを生成
+        Intent intent = new Intent(mContext, QRcodeCreate.class);
+        intent.putExtra("userID", 111111);
+        startActivity(intent);
+        */
+/*
+        //QRコードの作成
+        try {
+            String number = "111111";
+
+            QRCodeWriter writer = new QRCodeWriter();
+            //エンコード
+            BitMatrix bm = null;
+            bm = writer.encode(number, BarcodeFormat.QR_CODE, 100, 100);
+            //ピクセルを作る
+            int width = bm.getWidth();
+            int height = bm.getHeight();
+            int[] pixels = new int[width * height];
+            //データがあるところだけ黒にする
+            for(int y=0; y<height; y++){
+                int offset = y*width;
+                for(int x=0;x<width; x++){
+                    pixels[offset+x] = bm.get(x, y) ? Color.BLACK : Color.WHITE;
+                }
+            }
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+
+            //QRコードを表示する
+            ImageView image = new ImageView(mContext);
+            image.setImageBitmap(bitmap);
+            setContentView(image);
+
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+        */
+    }
+}
