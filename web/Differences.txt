@@ -1,0 +1,45 @@
+// zip解凍後からのcakePHPのディレクトリ構成の差分を示します
+// diffでみて、エディタから変更を加えた(≒作った)と思しきファイルを列挙してます
+// 「バージョン管理ソフト使ってますよね???」←正論。(かなしい)
+// ディレクトリ構成変更前のコミットを変更後コミットの前に後付したい
+// 命名の適当さなどありますが、気にしない方向でお願いします
+
+◯新規に追加したファイル
+  /app/Controller
+    UsersController.php
+    location_distance.php
+ 
+  /app/Model
+    Friend.php
+    Position.php
+    User.php
+
+  /app/View
+    Posts
+    Users
+
+  /app/View/Layouts 
+    sampleLayout.ctp 
+
+  /app/webroot/css
+    bootstrap-theme.css
+    bootstrap-theme.css.map
+    bootstrap-theme.min.css
+    bootstrap.css
+    bootstrap.css.map
+    bootstrap.min.css 
+
+  /app/webroot/js
+    MyMap.js
+    addMarker.js
+    bootstrap.js
+    bootstrap.min.js
+
+  /app/webroot/img/marker
+    C.png
+    D.png
+    E.png
+
+◯新規に追加したディレクトリ
+  /app/webroot/img/marker/ 
+  /plugins/DebugKit/
