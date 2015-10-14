@@ -25,6 +25,7 @@
 // Setup a 'default' cache configuration for use in the application.
 Cache::config('default', array('engine' => 'File'));
 CakePlugin::load('TwitterBootstrap');
+CakePlugin::load('BoostCake');
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
  *

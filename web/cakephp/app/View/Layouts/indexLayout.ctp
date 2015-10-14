@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo 'みんなといっしょ(仮)'; ?></title>
+    <title><?php echo 'みんなといっしょ'; ?></title>
     <!-- Bootstrap -->
     <?php echo $this->Html->css('bootstrap.min'); ?>
 
@@ -40,12 +40,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">みんなといっしょ(仮)</a>
+            <a class="navbar-brand" href="#">みんなといっしょ：<?php print(h($user['username'])); ?>さんとしてログイン</a>
         </div>
 
         <div class="collapse navbar-collapse  navbar-inversez" id="navbarEexample1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" >ログイン</a></li>
+                <li><?php print($this->Html->link('ログアウト', 'logout')); ?></li>
             </ul>
         </div>
     </div>

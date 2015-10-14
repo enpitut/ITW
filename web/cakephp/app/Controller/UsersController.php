@@ -5,16 +5,20 @@
  * Date: 15/08/28
  * Time: 7:54
  */
-require_once("location_distance.php");
+// require('Controller/UsersController.php'); と同じ
+App::import('Vendor', 'location_distance');
+App::uses('AppController', 'Controller');
 
 class UsersController extends AppController
 {
     public $helpers = array('Html', 'Form');
-    public $components = array('Paginator', 'Session');
+    //読み込むコンポーネントの指定
+    public $components = array('Paginator', 'Session','Auth');
 
     public function index()
     {
-        $this->layout = 'sampleLayout';
+        $this->set('user', $this->Auth->user());
+        $this->layout = 'indexLayout';
         $this->Session->write('Visitor.id', 1);
 
         $userdata = $this->User->find('all',
@@ -32,8 +36,6 @@ class UsersController extends AppController
                     'NOT' => array(
                         'user.parentid' => $this->Session->read('Visitor.id')
                     )
-
-
                 )
             )
         );
@@ -68,7 +70,7 @@ class UsersController extends AppController
 
                 if ($hoge["distance"] < 20.0) {
                     $resulttmp[].= (
-                         $friend[0]['User']['name']
+                         $friend[0]['User']['username']
                         . "が近くにいます"
                     );
                 }
@@ -83,6 +85,41 @@ class UsersController extends AppController
         }
         $this->set("otherdata", $otherdata);
         $this->set("userdata", $userdata);
+    }
+
+    //どのアクションが呼ばれてもはじめに実行される関数
+    public function beforeFilter()
+    {
+        parent::beforeFilter();
+
+        //未ログインでアクセスできるアクションを指定
+        //これ以外のアクションへのアクセスはloginにリダイレクトされる規約になっている
+        $this->Auth->allow('register', 'login');
+    }
+
+    public function register(){
+        //$this->requestにPOSTされたデータが入っている
+        //POSTメソッドかつユーザ追加が成功したら
+        if($this->request->is('post') && $this->User->save($this->request->data)){
+            //ログイン
+            //$this->request->dataの値を使用してログインする規約になっている
+            $this->Auth->login();
+            $this->redirect('index');
+        }
+    }
+
+    public function login(){
+        if($this->request->is('post')) {
+            if($this->Auth->login())
+                return $this->redirect('index');
+            else
+                $this->Session->setFlash('ログイン失敗');
+        }
+    }
+
+    public function logout(){
+        $this->Auth->logout();
+        $this->redirect('login');
     }
 }
 ?>
