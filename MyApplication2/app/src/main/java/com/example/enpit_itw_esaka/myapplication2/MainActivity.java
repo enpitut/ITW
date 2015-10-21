@@ -16,10 +16,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.provider.Settings;
-<<<<<<< HEAD
 import android.support.v4.content.ContextCompat;
-=======
->>>>>>> 7306bed0bbff04e9289837fa94e2e582a6c57d60
+
 import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
