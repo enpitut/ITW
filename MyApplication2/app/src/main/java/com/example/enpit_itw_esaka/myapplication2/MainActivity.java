@@ -17,7 +17,6 @@ import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
-
 import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
@@ -61,40 +60,6 @@ public class MainActivity extends Activity implements LocationListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-/*
-        //QRコードの作成
-        String number = "111111";
-        int width = 100;
-        int height = 100;
-        try {
-            QRCodeWriter writer = new QRCodeWriter();
-            //エンコード
-            BitMatrix bm = null;
-            bm = writer.encode(number, BarcodeFormat.QR_CODE, width, height);
-            //ピクセルを作る
-            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            //データがあるところだけ黒にする
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    bitmap.setPixel(x, y, bm.get(x, y) ? Color.BLACK : Color.WHITE);
-                }
-            }
-
-            //QRコードを表示する
-            if(bitmap==null){
-                //エンコード失敗
-                Log.v("Error", "エンコード失敗");
-            }else {
-                image = (ImageView) findViewById(R.id.image_qr);
-                image.setImageBitmap(bitmap);
-                setContentView(image);
-                //image.setVisibility(View.GONE);
-            }
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
-*/
-
         //WebViewインスタンスを生成
         webview = new WebView(this);
 
@@ -127,67 +92,32 @@ public class MainActivity extends Activity implements LocationListener{
         loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         mode=0;
-/*
-        //サーバへ接続
-        connection = null;
-        writer = null;
-        try{
-            connection = new Socket("192.168.128.103", 1000);//サーバのホスト名とポート番号を書く
-        }catch(UnknownHostException e){
-            e.printStackTrace();
-            Log.v("Error", e.toString());
-            Log.v("Server connection", "サーバとの接続に失敗しました");
-        }catch(IOException e){
-            e.printStackTrace();
-            Log.v("Error", e.toString());
-            Log.v("Server connection", "サーバとの接続に失敗しました");
-        }
-*/
+
     }
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        //「action_bar_menu.xml」で定義したメニュー項目を適用する
-        getMenuInflater().inflate(R.menu.action_bar_menu, menu);
-
-        //「ShareActionProvider」インスタンスを取得する
-        mShareActionProvider = (ShareActionProvider)menu.findItem(R.id.menu_share).getActionProvider();
-
-        //テキストを共有するためのインテントを生成
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-
-        //「サンプルテキスト」という文字列を共有するテキストとして指定
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "サンプルテキスト");
-
-        //共有ボタン押下時の共有インテントをセットする
-        mShareActionProvider.setShareIntent(shareIntent);
-
-        return true;
-    }
-*/
 
     //バーにボタンを追加する
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //「action_bar_menu2.xml」で定義したメニュー項目を適用する
         getMenuInflater().inflate(R.menu.action_var_menu2, menu);
-        return super.onCreateOptionsMenu(menu);
+        //return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     //ボタンを押されたとき
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(mode==0) {//ON
-            webview.setVisibility(View.GONE);
-            image.setVisibility(View.VISIBLE);
-            mode=1;
-        }else if(mode==1){//OFF
-            image.setVisibility(View.GONE);
-            webview.setVisibility(View.VISIBLE);
-            mode=0;
+    public boolean onMenuItemSelected(int featureId, MenuItem item){
+        switch(item.getItemId()) {
+            case R.id.menu_qr:
+                // 編集画面への遷移処理
+                Intent intent = new Intent(MainActivity.this, QRCodeCreate.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
         }
-        return true;
+
+        return super.onMenuItemSelected(featureId, item);
     }
 
 
@@ -208,6 +138,7 @@ public class MainActivity extends Activity implements LocationListener{
                 //Toast.makeText(this, "位置情報の許可がありません！", Toast.LENGTH_LONG).show();
             }
         }
+
 
 
 
@@ -237,25 +168,6 @@ public class MainActivity extends Activity implements LocationListener{
 
         Toast.makeText(this, Lat, Toast.LENGTH_SHORT).show();
         Log.v("ReceiverActivity", "経度" + Lat + "  緯度" + Lon + "  取得時間" + date);
-/*
-        //位置情報をサーバに送る
-        String msg = "Location" + " " + String.valueOf(longitude) + " " + String.valueOf(latitude);
-        try{
-            writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
-            writer.write(msg);
-            writer.flush();
-        }catch(IOException e){
-            e.printStackTrace();
-        }finally{
-            try{
-                writer.close();
-            }catch(IOException e){
-                e.printStackTrace();
-                Log.v("Error", e.toString());
-                Log.v("Server Message", "サーバとの接続に失敗しました");
-            }
-        }
-        */
     }
 
     public void onProviderDisabled(String provider){}
