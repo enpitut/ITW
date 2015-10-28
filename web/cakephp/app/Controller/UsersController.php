@@ -91,10 +91,11 @@ class UsersController extends AppController
     public function beforeFilter()
     {
         parent::beforeFilter();
-
+        $this->response->disableCache();
         //未ログインでアクセスできるアクションを指定
         //これ以外のアクションへのアクセスはloginにリダイレクトされる規約になっている
         $this->Auth->allow('register', 'login');
+
     }
 
     public function register(){
@@ -122,4 +123,3 @@ class UsersController extends AppController
         $this->redirect('login');
     }
 }
-?>

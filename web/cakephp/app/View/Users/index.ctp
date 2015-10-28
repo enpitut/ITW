@@ -1,3 +1,7 @@
+<?php
+header('Expires: -1');
+header('Pragma: no-cache');
+header('Cache-Control: no-cache');?>
 <html>
 <head>
     <script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
