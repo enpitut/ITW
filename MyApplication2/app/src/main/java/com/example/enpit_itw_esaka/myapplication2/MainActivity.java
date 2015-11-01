@@ -47,6 +47,7 @@ import java.util.Enumeration;
 
 public class MainActivity extends Activity implements LocationListener{
 
+    MyAsyncTask task;
     LocationManager loc;
     WebView webview;
     ImageView image;
@@ -55,7 +56,6 @@ public class MainActivity extends Activity implements LocationListener{
     Socket connection;
     BufferedWriter writer;
     private ShareActionProvider mShareActionProvider;
-    private int mode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,14 +91,12 @@ public class MainActivity extends Activity implements LocationListener{
         //LocationManagerインスタンスの生成
         loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        mode=0;
-
     }
 
     //バーにボタンを追加する
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //「action_bar_menu2.xml」で定義したメニュー項目を適用する
+        //「action_var_menu2.xml」で定義したメニュー項目を適用する
         getMenuInflater().inflate(R.menu.action_var_menu2, menu);
         //return super.onCreateOptionsMenu(menu);
         return true;
@@ -120,7 +118,6 @@ public class MainActivity extends Activity implements LocationListener{
         return super.onMenuItemSelected(featureId, item);
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -138,13 +135,7 @@ public class MainActivity extends Activity implements LocationListener{
                 //Toast.makeText(this, "位置情報の許可がありません！", Toast.LENGTH_LONG).show();
             }
         }
-
-
-
-
     }
-
-
 
     //位置情報が更新された時
     public void onLocationChanged(Location location){
@@ -167,6 +158,8 @@ public class MainActivity extends Activity implements LocationListener{
         String date = time.year + "年" + (time.month+1) + "月" + time.monthDay + "日" + time.hour + "時" + time.minute + "分" + time.second + "秒";
 
         Toast.makeText(this, Lat, Toast.LENGTH_SHORT).show();
+        task= new MyAsyncTask(this);
+        task.execute(Lat, Lon);
         Log.v("ReceiverActivity", "経度" + Lat + "  緯度" + Lon + "  取得時間" + date);
     }
 
