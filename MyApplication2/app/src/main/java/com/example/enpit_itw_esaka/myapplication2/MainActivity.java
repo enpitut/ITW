@@ -96,25 +96,24 @@ public class MainActivity extends Activity implements LocationListener{
     //バーにボタンを追加する
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //「action_var_menu2.xml」で定義したメニュー項目を適用する
-        getMenuInflater().inflate(R.menu.action_var_menu2, menu);
+        //「action_bar_menu2.xml」で定義したメニュー項目を適用する
+        getMenuInflater().inflate(R.menu.action_bar_menu2, menu);
         //return super.onCreateOptionsMenu(menu);
         return true;
     }
 
-    //ボタンを押されたとき
+    //バーのボタンを押されたとき
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item){
         switch(item.getItemId()) {
-            case R.id.menu_qr:
+            case R.id.menu_reg:
                 // 編集画面への遷移処理
-                Intent intent = new Intent(MainActivity.this, QRCodeCreate.class);
+                Intent intent = new Intent(MainActivity.this, RegFriends.class);
                 startActivity(intent);
                 break;
             default:
                 break;
         }
-
         return super.onMenuItemSelected(featureId, item);
     }
 
