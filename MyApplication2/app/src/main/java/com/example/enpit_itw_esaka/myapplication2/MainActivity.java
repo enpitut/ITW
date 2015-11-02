@@ -30,8 +30,6 @@ import android.widget.ImageView;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
-import com.example.enpit_itw_esaka.myapplication2.R;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
