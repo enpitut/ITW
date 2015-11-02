@@ -26,7 +26,7 @@ public class RegFriends extends Activity {
         return true;
     }
 
-    //バーのボタンを押されたとき
+    //バーのボタンを押したとき
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item){
         switch(item.getItemId()) {
@@ -40,6 +40,14 @@ public class RegFriends extends Activity {
         return super.onMenuItemSelected(featureId, item);
     }
 
+    //ボタンを押したとき
+    @Override
+    public void onClick(View v){
+        switch(v.getId()){
+            case R.id.button2:
+                //処理を書く
+        }
+    }
 
     /*
     private void showIntentData(Intent intent){
