@@ -47,6 +47,7 @@ public class RegFriends extends Activity {
             case R.id.button2:
                 //処理を書く
                 Log.v("event","push button!");
+                Toast.makeText(this, "ボタンがクリックされました", Toast.LENGTH_LONG).show();
                 break;
             default:
                 break;
