@@ -46,7 +46,7 @@ public class RegFriends extends Activity {
         switch(v.getId()){
             case R.id.button2:
                 //処理を書く
-                Log.v("event","push button!")
+                Log.v("event","push button!");
         }
     }
 
