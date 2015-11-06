@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
@@ -32,6 +34,27 @@ public class RegFriends extends Activity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regfriends);
+
+        Button button2 = (Button)findViewById(R.id.button2);
+        button2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //処理を書く
+                Log.v("event", "push button!");
+                //Toast.makeText(this, "ボタンがクリックされました", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button qr_reader = (Button)findViewById(R.id.qr_reader);
+        qr_reader.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //処理を書く
+                Log.v("event", "open reader!");
+                //Toast.makeText(this, "リーダーが開きます", Toast.LENGTH_SHORT).show();
+            }
+        });
+        
         createQRcode();
     }
 
@@ -60,25 +83,19 @@ public class RegFriends extends Activity implements OnClickListener {
 
     //ボタンを押したとき
     @Override
-    public void onClick(View v){
-        switch (v.getId()){
-            case R.id.button2:
-                //処理を書く
-                Log.v("event", "push button!");
-                Toast.makeText(this, "ボタンがクリックされました", Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
-        }
-    }
-
+    public void onClick(View v){}
+    
     private void createQRcode() {
         Bitmap qr = null;
         try{
-            qr = createQRCodeByZxing("http://google.co.jp", 400);
+            qr = createQRCodeByZxing("http://google.co.jp", 600);
         }catch (WriterException e){
             Log.d("createQRCode", "error:", e);
         }
+
+        //QRコードの表示
+        ImageView QRCodeImage = (ImageView)findViewById(R.id.qr_image);
+        QRCodeImage.setImageBitmap(qr);
 
         try{
             File root = Environment.getExternalStorageDirectory();
