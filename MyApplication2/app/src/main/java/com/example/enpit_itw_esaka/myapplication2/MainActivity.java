@@ -106,8 +106,8 @@ public class MainActivity extends Activity implements LocationListener{
         switch(item.getItemId()) {
             case R.id.menu_reg:
                 // 編集画面への遷移処理
-                Intent intent = new Intent(MainActivity.this, RegFriends.class);
-                startActivity(intent);
+                Intent edit_intent = new Intent(MainActivity.this, RegFriends.class);
+                startActivity(edit_intent);
                 break;
             default:
                 break;
@@ -123,7 +123,7 @@ public class MainActivity extends Activity implements LocationListener{
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                     || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED){
                 //許可されているならばここを実行
-                loc.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 1, this);
+                loc.requestLocationUpdates(LocationManager.GPS_PROVIDER, 50000, 1, this);
                 //Toast.makeText(this, "位置情報を設定しました", Toast.LENGTH_LONG).show();
                 Log.d("位置情報設定","True");
             }
@@ -152,12 +152,12 @@ public class MainActivity extends Activity implements LocationListener{
         //時間を取得
         Time time = new Time("Asia/Tokyo");
         time.setToNow();
-        String date = time.year + "年" + (time.month+1) + "月" + time.monthDay + "日" + time.hour + "時" + time.minute + "分" + time.second + "秒";
-
-        Toast.makeText(this, Lat, Toast.LENGTH_SHORT).show();
+        String date = time.year + "-" + (time.month+1) + "-" + time.monthDay + " " + time.hour + ":" + time.minute + ":" + time.second;
+        int dummy_user_id = 4;
+        //Toast.makeText(this, Lat, Toast.LENGTH_SHORT).show();
         task= new MyAsyncTask(this);
-        task.execute(Lat, Lon);
-        Log.v("ReceiverActivity", "経度" + Lat + "  緯度" + Lon + "  取得時間" + date);
+        task.execute(Lat, Lon, date, Integer.toString(dummy_user_id));
+        Log.v("ReceiverActivity", "経度 : " + Lat + "  緯度 : " + Lon + "  取得時間 : " + date);
     }
 
     public void onProviderDisabled(String provider){}

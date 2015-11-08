@@ -29,7 +29,7 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
 
     private Activity m_Activity;
 
-    private static final String url = "http://192.168.1.67/test.php";
+    private static final String url = "http://192.168.1.52/position_registor.php";
 
     //クライアント設定
     HttpClient httpclient = new DefaultHttpClient();
@@ -59,6 +59,8 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
         ArrayList <NameValuePair> params = new ArrayList<NameValuePair>();
         params.add( new BasicNameValuePair("lat", contents[0]));
         params.add(new BasicNameValuePair("lon", contents[1]));
+        params.add(new BasicNameValuePair("date", contents[2]));
+        params.add(new BasicNameValuePair("user_id", contents[3]));
 
         try {
             post.setEntity(new UrlEncodedFormEntity(params, "utf-8"));
@@ -68,11 +70,9 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
             res.getEntity().writeTo(byteArrayOutputStream);
 
         }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        catch(Exception e){
+            Log.v("MyAsyncTask", e.toString());
+            return -1;
         }
 
         return Integer.valueOf(res.getStatusLine().getStatusCode());
@@ -95,7 +95,13 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
     protected void onPostExecute(Integer result) {
         Log.d(TAG, "onPostExecute - " + result);
 
-
+        if(result == -1) {//通信に失敗
+            Log.d(TAG, "communication error");
+            return;
+        }
+        else{
+            Log.d(TAG,"Status : " + res.getStatusLine().getStatusCode());
+        }
         //サーバーからの応答を取得
         if(res.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
         {
