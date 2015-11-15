@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,10 +34,17 @@ import java.util.Date;
 import java.util.Hashtable;
 
 public class RegFriends extends Activity implements OnClickListener {
+
+    Integer user_id;
+    MyAsyncTask task;
+    
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regfriends);
+        user_id = 123456789;//実際はここに取得した自分のIDが入る
+        TextView idText = (TextView) this.findViewById(R.id.idText);
+        idText.setText(Integer.toString(user_id));
 
         Button button2 = (Button)findViewById(R.id.button2);
         button2.setOnClickListener(new OnClickListener() {
@@ -45,6 +53,11 @@ public class RegFriends extends Activity implements OnClickListener {
                 //処理を書く
                 Log.v("event", "push button!");
                 //Toast.makeText(this, "ボタンがクリックされました", Toast.LENGTH_SHORT).show();
+                EditText editText = (EditText) findViewById(R.id.editText);
+                SpannableStringBuilder fid = (SpannableStringBuilder)editText.getText();
+                String friend_id = fid.toString();
+                task = new MyAsyncTask(RegFriends.this);
+                task.execute(friend_id, Integer.toString(user_id));
             }
         });
 
