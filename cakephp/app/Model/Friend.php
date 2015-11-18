@@ -7,17 +7,14 @@
  */
 
 class Friend extends AppModel {
-    public $name1 = 'id';
-
-    public $name2 = 'friendsid';
-	public $n ='id';
 
 
-    public function beforeSave($options = array())
-    {
-        $this->data['id']['friendsid'] = AuthComponent::password($this->data['id']['friendsid'] );
-        return true;
-    }
+
+   // public function beforeSave($options = array())
+ //   {
+      //  $this->data[$user['id']]['friendsid'] = AuthComponent::password($this->data[$user['id']]['friendsid'] );
+     //   return true;
+ //   }
 
 }
 
