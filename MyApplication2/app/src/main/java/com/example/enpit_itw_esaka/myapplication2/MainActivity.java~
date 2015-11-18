@@ -197,7 +197,6 @@ public class MainActivity extends Activity implements LocationListener{
     public void onResume() {
         super.onResume();
         //位置情報更新の設定(更新時間：5秒、更新距離：1m)
-<<<<<<< HEAD
         if(loc != null){
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                     || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED){
@@ -212,10 +211,6 @@ public class MainActivity extends Activity implements LocationListener{
             }
         }
 
-
-=======
-        loc.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 1, this);
->>>>>>> 7306bed0bbff04e9289837fa94e2e582a6c57d60
 
 
     }
@@ -242,10 +237,7 @@ public class MainActivity extends Activity implements LocationListener{
         time.setToNow();
         String date = time.year + "年" + (time.month+1) + "月" + time.monthDay + "日" + time.hour + "時" + time.minute + "分" + time.second + "秒";
 
-<<<<<<< HEAD
         Toast.makeText(this, Lat, Toast.LENGTH_SHORT).show();
-=======
->>>>>>> 7306bed0bbff04e9289837fa94e2e582a6c57d60
         Log.v("ReceiverActivity", "経度" + Lat + "  緯度" + Lon + "  取得時間" + date);
 /*
         //位置情報をサーバに送る
@@ -278,15 +270,11 @@ public class MainActivity extends Activity implements LocationListener{
     protected void onDestroy(){
         super.onDestroy();
         //位置情報更新の解除
-<<<<<<< HEAD
         if(loc != null) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                     || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 loc.removeUpdates(this);
             }
         }
-=======
-        loc.removeUpdates(this);
->>>>>>> 7306bed0bbff04e9289837fa94e2e582a6c57d60
     }
 }
