@@ -59,7 +59,7 @@
 
         print(
             $this->Form->create('Friend') .
-			$this->Form->hidden(h($user['id'])).
+			$this->Form->hidden('user_id',array('value' => $user['id'])).
             $this->Form->input('friendsid', array(
                 'label'=>false,
                 'placeholder' => '友達のユーザID',
