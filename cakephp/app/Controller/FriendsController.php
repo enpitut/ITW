@@ -103,7 +103,6 @@ class UsersController extends AppController
         $this->layout = 'indexLayout';
 
 		if($this->request->is('post')){
-			$this->loadModel('Friend');
 			$this->Friend->save($this->request->data);
 		}
 
