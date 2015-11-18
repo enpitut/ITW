@@ -10,12 +10,12 @@ class Friend extends AppModel {
     public $name1 = 'id';
 
     public $name2 = 'friendsid';
-
+	public $n ='id';
 
 
     public function beforeSave($options = array())
     {
-        $this->data['friendsid'] = AuthComponent::password($this->data['friendsid'] );
+        $this->data['id']['friendsid'] = AuthComponent::password($this->data['id']['friendsid'] );
         return true;
     }
 
