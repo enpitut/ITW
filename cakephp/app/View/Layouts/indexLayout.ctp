@@ -48,6 +48,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><?php print($this->Html->link('メイン', 'index')); ?></li>
                 <li><?php print($this->Html->link('おともだち', 'friend')); ?></li>
+                <li><?php print($this->Html->link('おうちのかた', 'parent')); ?></li>
                 <li><?php print($this->Html->link('ログアウト', 'logout')); ?></li>
             </ul>
         </div>

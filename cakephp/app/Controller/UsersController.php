@@ -110,6 +110,14 @@ class UsersController extends AppController
 
 	}
 
+
+	public function parent() {
+        $this->set('user', $this->Auth->user());
+        $this->layout = 'indexLayout';
+	}
+
+
+
     public function register(){
         //$this->requestにPOSTされたデータが入っている
         //POSTメソッドかつユーザ追加が成功したら
