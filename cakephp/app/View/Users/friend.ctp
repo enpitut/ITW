@@ -22,15 +22,11 @@
             ),
             'class' => 'well form-inline'
         ));
+
 		///ここに，配列に入っているフレンドをすべて表示
-		$count = 0;
-
-		while ($count < 15){
-  			// 実行する処理
-  			$count++;
-			print('ふれんど'.$count.'<br>');
-
-		}
+        foreach ($friendsname as $name) {
+            print ($name.'<br>');
+        }
 	
 
         $this->Form->end(); 
@@ -59,7 +55,7 @@
 
         print(
             $this->Form->create('Friend') .
-			$this->Form->hidden('user_id',array('value' => $user['id'])).
+			$this->Form->hidden('user_id', array('value' => $user['id'])).
             $this->Form->input('friendsid', array(
                 'label'=>false,
                 'placeholder' => '友達のユーザID',
