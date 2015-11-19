@@ -98,17 +98,43 @@ class UsersController extends AppController
 
     }
 
-	public function friend(){
+   public function friend(){
+
+        //友達登録ボタンを押していたら、データベースを更新する
+        if($this->request->is('post')){
+            $this->loadModel('Friend');
+            $this->Friend->save($this->request->data);
+        }
+
+        //ログインユーザの情報を取得する
+        $user = $this->User->find('first',
+            array(
+                    'conditions' => array('user.id' => $this->Auth->user('id'))
+            )
+        );
+
+        //ログインユーザの友達の情報を取得する
+        $friends = array();
+        foreach ($user['friend'] as $friend) {
+            array_push($friends, 
+                $this->User->find('all',
+                    array(
+                        'conditions' => array('user.id' => $friend['friendsid'])
+                    )
+                )
+            );
+        }
+
+        //ログインユーザの友達の名前を取得する
+        $friendsname = array();
+        foreach ($friends as $friend) {
+            array_push($friendsname, $friend[0]['User']['username']);
+        }
+
+        $this->set('friendsname', $friendsname);
         $this->set('user', $this->Auth->user());
         $this->layout = 'indexLayout';
-
-		if($this->request->is('post')){
-			$this->loadModel('Friend');
-			$this->Friend->save($this->request->data);
-		}
-
-
-	}
+    }
 
 
 	public function parent() {
