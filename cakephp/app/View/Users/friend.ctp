@@ -24,8 +24,8 @@
         ));
 
 		///ここに，配列に入っているフレンドをすべて表示
-        foreach ($friendsname as $name) {
-            print ($name.'<br>');
+        foreach ($friends as $friend) {
+            print ('ID:'.$friend[0]['User']['id'].'   なまえ：'.$friend[0]['User']['username'].'<br>');
         }
 	
 
@@ -61,10 +61,15 @@
                 'placeholder' => '友達のユーザID',
                 'class'=>'form-control'
             )) .
-
             $this->Form->submit('登録', array(
                 'div' => 'form-group',
-                'class' => 'btn btn-default'
+                'class' => 'btn btn-default',
+                'name' => 'register'
+            )).
+            $this->Form->submit('削除', array(
+                'div' => 'form-group',
+                'class' => 'btn btn-default',
+                'name' => 'delete'
             )));
 
         $this->Form->end();

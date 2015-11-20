@@ -103,7 +103,18 @@ class UsersController extends AppController
         //友達登録ボタンを押していたら、データベースを更新する
         if($this->request->is('post')){
             $this->loadModel('Friend');
-            $this->Friend->save($this->request->data);
+            if(isset($this->request->data['register'])) {
+               $this->Friend->save($this->request->data);
+            }
+            if(isset($this->request->data['delete'])) {
+                $delete_id = $this->Friend->find('first',
+                    array(
+                        'fields' => array('friend.id'),
+                        'conditions' => array('friend.user_id' => $this->request->data['Friend']['user_id'], 'friend.friendsid' => $this->request->data['Friend']['friendsid'])
+                    )
+                );
+                $this->Friend->delete($delete_id['Friend']['id']);
+            }
         }
 
         //ログインユーザの情報を取得する
@@ -125,13 +136,7 @@ class UsersController extends AppController
             );
         }
 
-        //ログインユーザの友達の名前を取得する
-        $friendsname = array();
-        foreach ($friends as $friend) {
-            array_push($friendsname, $friend[0]['User']['username']);
-        }
-
-        $this->set('friendsname', $friendsname);
+        $this->set('friends', $friends);
         $this->set('user', $this->Auth->user());
         $this->layout = 'indexLayout';
     }
