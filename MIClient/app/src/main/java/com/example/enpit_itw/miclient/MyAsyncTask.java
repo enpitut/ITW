@@ -26,7 +26,7 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
 
     private Activity m_Activity;
 
-    private static final String url = "http://192.168.1.62/position_registor.php";
+    private static final String url = "http://192.168.1.68/position_registor.php";
 
     //クライアント設定
     HttpClient httpclient = new DefaultHttpClient();

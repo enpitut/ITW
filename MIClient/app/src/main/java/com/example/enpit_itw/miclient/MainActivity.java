@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.location.Criteria;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ShareActionProvider;
 
@@ -29,6 +32,7 @@ public class MainActivity extends Activity{
     Socket connection;
     BufferedWriter writer;
     private ShareActionProvider mShareActionProvider;
+    final String url = "http://192.168.1.68/cakephp/Users/login";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,12 +49,23 @@ public class MainActivity extends Activity{
         //読み込み時にページ幅を画面幅に合わせる
         webview.getSettings().setUseWideViewPort(true);
         webview.getSettings().setLoadWithOverviewMode(true);
+        //新しいタブ・ウィンドウをWebviewないで立ち上げられるようにする
+        webview.getSettings().setSupportMultipleWindows(true);
+
+        //あたらしいWindowやタブをChromeを立ち上げずにWebView内で立ち上げる
+        webview.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+        });
+
 
         //ネットワークに接続していないときはキャッシュを表示する
         webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
         //指定したURLをWebビューに設定する
-        webview.loadUrl("https://www.google.co.jp/");
+        webview.loadUrl(url);
 
 
         //位置情報取得時に実行するインテントを生成
@@ -58,11 +73,13 @@ public class MainActivity extends Activity{
         //pendingintent = PendingIntent.getActivity(this, 0, intent, 0);
 
         //精度を設定
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        // Criteria criteria = new Criteria();
+        // criteria.setAccuracy(Criteria.ACCURACY_FINE);
 
         //LocationManagerインスタンスの生成
-        loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Intent i = new Intent(this, com.example.enpit_itw.miclient.LocationSendingService.class);
+        startService(i);
 
     }
 
@@ -111,7 +128,10 @@ public class MainActivity extends Activity{
 
     @Override
     protected void onDestroy(){
+        Intent i = new Intent(this, com.example.enpit_itw.miclient.LocationSendingService.class);
+        stopService(i);
         super.onDestroy();
+
 
     }
 }
