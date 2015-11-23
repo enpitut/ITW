@@ -33,6 +33,10 @@ import java.util.Date;
 import java.util.Hashtable;
 
 public class RegFriends extends Activity implements OnClickListener {
+    
+    Integer user_id;
+    MyAsyncTask task;
+    
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
