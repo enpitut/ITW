@@ -50,24 +50,27 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
 
     @Override
     protected Integer doInBackground(String... contents) {
+        ArrayList <NameValuePair> params = new ArrayList<NameValuePair>();
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost post;
+        
         if(contents[0] == "friends") {
             Log.d(TAG, "doInBackground - " + contents[1] + contents[2]);
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpPost post = new HttpPost(urlF);
+            post = new HttpPost(urlF);
 
-            ArrayList <NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("friend_id", contents[1]));
             params.add(new BasicNameValuePair("user_id", contents[2]));
         }else if(contents[0] == "position"){
             Log.d(TAG, "doInBackground - " + contents[1] + contents[2]);
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpPost post = new HttpPost(url);
-    
-            ArrayList <NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add( new BasicNameValuePair("lat", contents[1]));
+            post = new HttpPost(url);
+
+            params.add(new BasicNameValuePair("lat", contents[1]));
             params.add(new BasicNameValuePair("lon", contents[2]));
             params.add(new BasicNameValuePair("date", contents[3]));
             params.add(new BasicNameValuePair("user_id", contents[4]));
+        }else{
+            Log.v(TAG, "contents error!");
+            return -1;
         }
 
         try {
