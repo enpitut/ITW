@@ -4,10 +4,8 @@
   $password = 'enPiT2015ITW';
   if(!isset($_POST["user_id"])){$_POST["user_id"]="";}
   if(!isset($_POST["friend_id"])){$_POST["friend_id"]="";}
-  /*
   $user_id = htmlspecialchars($_POST["user_id"]);
   $friend_id = htmlspecialchars($_POST["friend_id"]);
-  */
 
   try{
     $dbh = new PDO($dsn, $user, $password);
@@ -16,14 +14,12 @@
     }
     else{
       $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-      $sql = 'INSERT INTO friends VALUES (?, ?)';
+      $sql = 'INSERT INTO friends (user_id, friendsid) VALUES (:user_id, :friend_id)';
       $stmt = $dbh->prepare($sql);
-      /*
-      $stmt->bindValue(':friendsid', $friend_id, PDO::PARAM_INT);
+      $stmt->bindValue(':friend_id', $friend_id, PDO::PARAM_INT);
       $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-      */
+
       $stmt->execute(array($_POST["user_id"], $_POST["friend_id"]));
-      $stmt->execute(array($_POST["friend_id"], $_POST["user_id"]));
       echo 1;
     }
   }catch (PDOException $e){
