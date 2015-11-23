@@ -84,7 +84,7 @@ public class LocationSendingService  extends Service implements LocationListener
         Toast.makeText(this, Lat + " ," + Lon, Toast.LENGTH_SHORT).show();
 
         task= new MyAsyncTask();
-        task.execute(Lat, Lon, date, Integer.toString(dummy_user_id));
+        task.execute("position", Lat, Lon, date, Integer.toString(dummy_user_id));
 
         Log.v("ReceiverActivity", "経度 : " + Lat + "  緯度 : " + Lon + "  取得時間 : " + date);
     }
