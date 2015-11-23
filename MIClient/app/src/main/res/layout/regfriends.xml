@@ -8,7 +8,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="123 456 789"
         android:textSize="18pt"/>
 
     <EditText
@@ -17,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="top|left"
-        android:hint="@string/id" />
+        android:hint="ユーザIDを入力してください" />
 
     <Button
         android:id="@+id/button2"
@@ -25,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="送信"
-        android:hint="@string/zxing_button_ok" />
+        android:hint="OK" />
 
     <ImageView
         android:id="@+id/qr_image"
