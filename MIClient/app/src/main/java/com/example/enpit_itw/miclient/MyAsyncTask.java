@@ -27,6 +27,7 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
     private Activity m_Activity;
 
     private static final String url = "http://192.168.1.68/position_registor.php";
+    private static final String urlF = "http://192.168.1.68/friend_registor.php";
 
     //クライアント設定
     HttpClient httpclient = new DefaultHttpClient();
@@ -49,15 +50,25 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
 
     @Override
     protected Integer doInBackground(String... contents) {
-        Log.d(TAG, "doInBackground - " + contents[0] + contents[1]);
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpPost post = new HttpPost(url);
+        if(contents[0] == "friends") {
+            Log.d(TAG, "doInBackground - " + contents[1] + contents[2]);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost post = new HttpPost(urlF);
 
-        ArrayList <NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add( new BasicNameValuePair("lat", contents[0]));
-        params.add(new BasicNameValuePair("lon", contents[1]));
-        params.add(new BasicNameValuePair("date", contents[2]));
-        params.add(new BasicNameValuePair("user_id", contents[3]));
+            ArrayList <NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("friend_id", contents[1]));
+            params.add(new BasicNameValuePair("user_id", contents[2]));
+        }else if(contents[0] == "position"){
+            Log.d(TAG, "doInBackground - " + contents[1] + contents[2]);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost post = new HttpPost(url);
+    
+            ArrayList <NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add( new BasicNameValuePair("lat", contents[1]));
+            params.add(new BasicNameValuePair("lon", contents[2]));
+            params.add(new BasicNameValuePair("date", contents[3]));
+            params.add(new BasicNameValuePair("user_id", contents[4]));
+        }
 
         try {
             post.setEntity(new UrlEncodedFormEntity(params, "utf-8"));
