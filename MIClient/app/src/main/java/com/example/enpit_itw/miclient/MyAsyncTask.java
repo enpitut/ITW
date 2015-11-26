@@ -13,6 +13,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -48,9 +49,11 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
     @Override
     protected Integer doInBackground(String... contents) {
         ArrayList <NameValuePair> params = new ArrayList<NameValuePair>();
-        HttpClient httpClient = new DefaultHttpClient();
+        DefaultHttpClient httpClient = new DefaultHttpClient();
         HttpPost post;
-        
+
+
+
         if(contents[0] == "friends") {
             Log.d(TAG, "doInBackground - " + contents[1] + contents[2]);
             post = new HttpPost(urlF);
@@ -65,7 +68,12 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
             params.add(new BasicNameValuePair("lon", contents[2]));
             params.add(new BasicNameValuePair("date", contents[3]));
             params.add(new BasicNameValuePair("user_id", contents[4]));
-        }else{
+        }
+        else if(contents[0] == "test"){
+            SessionSync.webView2HttpClient(httpClient);
+            post = new HttpPost("http://192.168.1.66/session_test.php");
+        }
+        else{
             Log.v(TAG, "contents error!");
             return -1;
         }
@@ -113,16 +121,12 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
         //サーバーからの応答を取得
         if(res.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
         {
-//デバッグ用にリザルトコードをTextViewに表示させておく
-            /*
-            TextView tv = (TextView) this.m_Activity.findViewById(R.id.textView1);
-            tv.setText(""+result);
-
-            tv.setText(result+"\n"+byteArrayOutputStream.toString());
-*/
-//サーバーから受けとった文字列の処理
-            //Toast.makeText(this.m_Activity, "結果 : " + byteArrayOutputStream.toString(),Toast.LENGTH_LONG).show();
-            Log.d(TAG, "サーバからの応答 : " + byteArrayOutputStream.toString());
+            try {
+                Log.d(TAG, "サーバからの応答 : " + EntityUtils.toString(res.getEntity()));
+            }
+            catch(Exception e){
+                Log.d(TAG, "Entityが空");
+            }
             /*
             if(byteArrayOutputStream.toString().equals("1")){
                 Toast.makeText(this.m_Activity, "[ここには処理１] ", Toast.LENGTH_LONG).show();
