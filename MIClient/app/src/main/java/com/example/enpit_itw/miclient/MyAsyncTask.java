@@ -27,8 +27,8 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
 
     private Activity m_Activity;
 
-    private static final String url = "http://192.168.1.66/position_registor.php";
-    private static final String urlF = "http://192.168.1.66/friend_registor.php";
+    private static final String url = "http://192.168.1.64/position_registor.php";
+    private static final String urlF = "http://192.168.1.64/friend_registor.php";
 
 
     List<NameValuePair> nameValuePair;
@@ -53,7 +53,6 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
         HttpPost post;
 
 
-
         if(contents[0] == "friends") {
             Log.d(TAG, "doInBackground - " + contents[1] + contents[2]);
             post = new HttpPost(urlF);
@@ -63,15 +62,12 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
         }else if(contents[0] == "position"){
             Log.d(TAG, "doInBackground - " + contents[1] + contents[2]);
             post = new HttpPost(url);
+            SessionSync.webView2HttpClient(httpClient);
 
             params.add(new BasicNameValuePair("lat", contents[1]));
             params.add(new BasicNameValuePair("lon", contents[2]));
             params.add(new BasicNameValuePair("date", contents[3]));
-            params.add(new BasicNameValuePair("user_id", contents[4]));
-        }
-        else if(contents[0] == "test"){
-            SessionSync.webView2HttpClient(httpClient);
-            post = new HttpPost("http://192.168.1.66/session_test.php");
+            //params.add(new BasicNameValuePair("user_id", contents[4]));
         }
         else{
             Log.v(TAG, "contents error!");

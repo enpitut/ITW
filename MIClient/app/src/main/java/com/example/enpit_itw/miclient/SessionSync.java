@@ -16,7 +16,7 @@ import android.webkit.CookieSyncManager;
  */
 public class SessionSync {
     // COOKIEの送出するドメインを指定します
-    private static final String YOUR_DOMAIN = "192.168.1.66";
+    private static final String YOUR_DOMAIN = "192.168.1.64";
 
     // COOKIE取得用のドメイン(.をつけてサブドメインもカバーします)
     private static final String COOKIE_DOMAIN = "." + YOUR_DOMAIN;
@@ -25,7 +25,7 @@ public class SessionSync {
 
     // セッションIDを格納するパラメータ名を指定します
 // これはPHPの例
-    private static final String SESSID = "CAKEPHP";
+    private static final String SESSID = "PHPSESSID";
 
     /**
      * HttpClient側のセッションIDをWebViewに同期します
@@ -66,7 +66,7 @@ public class SessionSync {
             String[] cookieSet = keyValue.split("=");
             String key = cookieSet[0];
             String value = cookieSet[1];
-            //Log.v("SessionSync", key + value);
+            Log.v("SessionSync", "session cookie name : " + key + " <> " + value);
             if (!SESSID.equals(key)) {
                 continue;
             }

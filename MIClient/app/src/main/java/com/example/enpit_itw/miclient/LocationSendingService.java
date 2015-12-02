@@ -80,11 +80,10 @@ public class LocationSendingService  extends Service implements LocationListener
         Time time = new Time("Asia/Tokyo");
         time.setToNow();
         String date = time.year + "-" + (time.month+1) + "-" + time.monthDay + " " + time.hour + ":" + time.minute + ":" + time.second;
-        int dummy_user_id = 4;
         Toast.makeText(this, Lat + " ," + Lon, Toast.LENGTH_SHORT).show();
 
         task= new MyAsyncTask();
-        task.execute("position", Lat, Lon, date, Integer.toString(dummy_user_id));
+        task.execute("position", Lat, Lon, date);
 
         Log.v("ReceiverActivity", "経度 : " + Lat + "  緯度 : " + Lon + "  取得時間 : " + date);
     }

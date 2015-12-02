@@ -69,8 +69,6 @@ public class RegFriends extends Activity implements OnClickListener {
                 //処理を書く
                 Log.v("event", "open reader!");
                 //Toast.makeText(this, "リーダーが開きます", Toast.LENGTH_SHORT).show();
-                MyAsyncTask t = new MyAsyncTask();
-                t.execute("test");
 
                 IntentIntegrator integrator = new IntentIntegrator(RegFriends.this);
                 integrator.setCaptureActivity(CaptureActivityAnyOrientation.class);
