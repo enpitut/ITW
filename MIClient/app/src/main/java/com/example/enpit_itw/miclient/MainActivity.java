@@ -37,18 +37,13 @@ public class MainActivity extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         //WebViewインスタンスを生成
-        webview = new WebView(this);
+        webview = (WebView) findViewById(R.id.webview);
 
         //JavaScriptを有効にする
         webview.getSettings().setJavaScriptEnabled(true);
 
-        //setContentViewに作成したWebビューを設定する
-        setContentView(webview);
-
-        //読み込み時にページ幅を画面幅に合わせる
-        webview.getSettings().setUseWideViewPort(true);
-        webview.getSettings().setLoadWithOverviewMode(true);
         //新しいタブ・ウィンドウをWebviewないで立ち上げられるようにする
         webview.getSettings().setSupportMultipleWindows(true);
 
@@ -59,7 +54,6 @@ public class MainActivity extends Activity{
                 return false;
             }
         });
-
 
         //ネットワークに接続していないときはキャッシュを表示する
         webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
