@@ -22,12 +22,19 @@ header('Cache-Control: no-cache');?>
 
 <?php
 
-foreach ($userdata as $dat) {
-    $path='http://localhost:81/cakephp/app/webroot/img/marker/'.$dat['User']['imgpath'];
+foreach ($userdata as $dat) {    
+
     echo <<<EOD
     <div class="media">
         <a class="media-left" onclick="panTo({$dat['position']['longitude']},{$dat['position']['latitude']})" >
-            <img src="{$path}" width="80" height="80">
+EOD;
+    echo $this->Html->image('marker/'.$dat['User']['imgpath'], 
+        array(
+            'width'=>'80',
+            'height'=>'80'            
+            )
+        );
+    echo <<<EOD
         </a>
         <div class="media-body">
            <h4 class="media-heading">
@@ -40,16 +47,17 @@ EOD;
 EOD;
 }
 ?>
+
 <script>
     <?php
     echo 'init('.$userdata[0]['position']['longitude'].',' .$userdata[0]['position']['latitude'].');';
 
     foreach ($userdata as $dat) {
-        $path='http://localhost:81/cakephp/app/webroot/img/marker/'.$dat['User']['imgpath'];
+        $path='http://localhost/cakephp/app/webroot/img/marker/'.$dat['User']['imgpath'];
         echo 'AddMarker(' . $dat['position']['longitude'] . ',' . $dat['position']['latitude']. ',"' . $path . '");' ;
     }
     foreach ($otherdata as $dat) {
-        //$path='http://localhost:81/cakephp/app/webroot/img/marker/'.$dat['User']['imgpath'];
+        //$path='http://localhost/cakephp/app/webroot/img/marker/'.$dat['User']['imgpath'];
         echo 'AddNormalMarker(' . $dat['position']['longitude'] . ',' . $dat['position']['latitude'] . ');';
     }
     ?>
