@@ -31,6 +31,7 @@ public class MainActivity extends Activity{
     Context context;
     Socket connection;
     BufferedWriter writer;
+    String user_id;
     private ShareActionProvider mShareActionProvider;
     final String url = "http://192.168.1.64/cakephp/Users/login";
 
@@ -53,6 +54,15 @@ public class MainActivity extends Activity{
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
+            /*
+            @Override
+            public void onPageFinished(WebView view, String url){
+                super.onPageFinished(view, url);
+                if(!SessionSync.user_idHttpClient().equals("Fault")){
+                    user_id = SessionSync.user_idHttpClient();
+                }
+            }
+            */
         });
 
         //ネットワークに接続していないときはキャッシュを表示する
@@ -94,6 +104,7 @@ public class MainActivity extends Activity{
             case R.id.menu_reg:
                 // 編集画面への遷移処理
                 Intent edit_intent = new Intent(MainActivity.this, RegFriends.class);
+                //edit_intent.putExtra("user_id", user_id);
                 startActivity(edit_intent);
                 break;
             default:

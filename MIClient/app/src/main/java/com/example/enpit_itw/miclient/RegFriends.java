@@ -43,8 +43,14 @@ public class RegFriends extends Activity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regfriends);
-        user_id = 123456789;//実際はここに取得した自分のIDが入る
         TextView idText = (TextView) this.findViewById(R.id.idText);
+
+        //インテントを利用したuser_idの取得(こっちを使う場合、user_idはString型に！)
+        //Intent intent = getIntent();
+        //user_id = intent.getIntExtra("user_id");
+        //idText.setText(user_id);
+
+        user_id = 123456789;//実際はここに取得した自分のIDが入る
         idText.setText(Integer.toString(user_id));
 
         Button button2 = (Button)findViewById(R.id.button2);
