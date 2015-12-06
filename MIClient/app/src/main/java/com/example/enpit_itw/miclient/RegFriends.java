@@ -58,7 +58,7 @@ public class RegFriends extends Activity implements OnClickListener {
                 SpannableStringBuilder fid = (SpannableStringBuilder)editText.getText();
                 String friend_id = fid.toString();
                 task = new MyAsyncTask();
-                task.execute("friends", friend_id, Integer.toString(user_id));
+                task.execute("friends", friend_id);
             }
         });
 
