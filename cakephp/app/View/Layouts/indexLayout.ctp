@@ -42,8 +42,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">みんなといっしょ：<?php print(h($user['username']." さん (ID: ")); ?>
-                    <?php print(h($user['id']).")"); ?>としてログイン</a>
+                <a class="navbar-brand" href="#"><?php print(h($user['username']." さん (ID: ")); ?>
+                    <?php print(h($user['id']).")"); ?></a>
                 </div>
 
                 <div class="collapse navbar-collapse  navbar-inversez" id="navbarEexample1">

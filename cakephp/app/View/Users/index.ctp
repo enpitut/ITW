@@ -2,6 +2,7 @@
 header('Expires: -1');
 header('Pragma: no-cache');
 header('Cache-Control: no-cache');?>
+
 <html>
 <head>
     <script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
@@ -31,7 +32,7 @@ header('Cache-Control: no-cache');?>
     </script>
 <div class="container">
     <div>
-        <div  id="canvas" style="width:auto; height:600px;padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"></div>
+        <div  id="canvas" style="width:100%; height:85vh ;padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"></div>
     </div>
 </div>
 
