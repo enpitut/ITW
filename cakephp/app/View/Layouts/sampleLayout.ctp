@@ -31,34 +31,35 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">みんなといっしょ(仮)</a>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">みんなといっしょ(仮)</a>
+            </div>
+
+            <div class="collapse navbar-collapse  navbar-inversez" id="navbarEexample1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" >ログイン</a></li>
+                </ul>
+            </div>
         </div>
+    </nav>
+    <?php echo $this->Session->flash(); ?>
 
-        <div class="collapse navbar-collapse  navbar-inversez" id="navbarEexample1">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" >ログイン</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<?php echo $this->Session->flash(); ?>
+    <?php echo $this->fetch('content'); ?>
 
-<?php echo $this->fetch('content'); ?>
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<?php echo $this->Html->script('bootstrap.min'); ?>
-<?php echo $this->fetch('script'); ?>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <?php echo $this->Html->script('jquery.sidr.min'); ?>
+    <?php echo $this->Html->script('bootstrap.min'); ?>
+    <?php echo $this->fetch('script'); ?>
 
 </body>
 </html>

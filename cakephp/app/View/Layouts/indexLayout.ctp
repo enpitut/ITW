@@ -1,4 +1,5 @@
-<html lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,41 +28,42 @@
     <?php echo $this->Html->meta('icon');?>
     <?php echo $this->fetch('meta');?>
     <?php echo $this->Html->css('base-style.css'); ?>
+    <?php echo $this->Html->css('jquery.sidr.light'); ?>
     <?php echo $this->fetch('css');?>
 </head>
+
 <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">みんなといっしょ：<?php print(h($user['username']." さん (ID: ")); ?>
+                    <?php print(h($user['id']).")"); ?>としてログイン</a>
+                </div>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">みんなといっしょ：<?php print(h($user['username']." さん (ID: ")); ?>
-												<?php print(h($user['id']).")"); ?>としてログイン</a>
-        </div>
+                <div class="collapse navbar-collapse  navbar-inversez" id="navbarEexample1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><?php print($this->Html->link('メイン', 'index')); ?></li>
+                        <li><?php print($this->Html->link('おともだち', 'friend')); ?></li>
+                        <li><?php print($this->Html->link('おうちのかた', 'parent')); ?></li>
+                        <li><?php print($this->Html->link('ログアウト', 'logout')); ?></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-        <div class="collapse navbar-collapse  navbar-inversez" id="navbarEexample1">
-            <ul class="nav navbar-nav navbar-right">
-                <li><?php print($this->Html->link('メイン', 'index')); ?></li>
-                <li><?php print($this->Html->link('おともだち', 'friend')); ?></li>
-                <li><?php print($this->Html->link('おうちのかた', 'parent')); ?></li>
-                <li><?php print($this->Html->link('ログアウト', 'logout')); ?></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <?php echo $this->Html->script('http://code.jquery.com/jquery.min.js'); ?>
+        <?php echo $this->Html->script('jquery.sidr.min'); ?>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <?php echo $this->Html->script('bootstrap.min'); ?>
 
-<?php echo $this->fetch('content'); ?>
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<?php echo $this->Html->script('bootstrap.min'); ?>
-<?php echo $this->fetch('script'); ?>
-
-</body>
-</html>
+        <?php echo $this->fetch('script'); ?>
+        <?php echo $this->fetch('content'); ?>
+    </body>
+    </html>
