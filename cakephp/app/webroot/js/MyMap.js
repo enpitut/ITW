@@ -52,7 +52,6 @@ function onPopupClose(evt) {
 function onFeatureSelect(evt) {
     var feature = evt.feature;
     var content = '';
-
     popup = new OpenLayers.Popup.FramedCloud("featurePopup",
         feature.geometry.getBounds().getCenterLonLat(),
         new OpenLayers.Size(100, 100),feature.attributes.description,
@@ -60,6 +59,13 @@ function onFeatureSelect(evt) {
     feature.popup = popup;
     popup.feature = feature;
     map.addPopup(popup);
+    map.zoomTo(18);
+    var lonLat = map.getCenter().transform(
+        new OpenLayers.Projection("EPSG:900913"),
+        new OpenLayers.Projection("EPSG:4326")
+    );
+    map.zoomTo(18);
+    map.panTo(feature.geometry.getBounds().getCenterLonLat());
 }
 
 //コールバック関数、アイコン外をクリックした時の処理
