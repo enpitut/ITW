@@ -34,25 +34,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
 
-public class RegFriends extends Activity implements OnClickListener {
+public class RegFriends extends Activity implements OnClickListener, GetId.AsyncTaskCallback {
     
     Integer user_id;
     MyAsyncTask task;
+    GetId task2;
+    CheckBox checkbox;
     
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regfriends);
+        task2 = new GetId((GetId.AsyncTaskCallback) this);
+        task2.execute("user_id");
+        /*
         TextView idText = (TextView) this.findViewById(R.id.idText);
-
-        //インテントを利用したuser_idの取得(こっちを使う場合、user_idはString型に！)
-        //Intent intent = getIntent();
-        //user_id = intent.getIntExtra("user_id");
-        //idText.setText(user_id);
-
         user_id = 123456789;//実際はここに取得した自分のIDが入る
         idText.setText(Integer.toString(user_id));
+        */
 
+        checkbox = (CheckBox) findViewById(R.id.checkbox);
         Button button2 = (Button)findViewById(R.id.button2);
         button2.setOnClickListener(new OnClickListener() {
             @Override
@@ -64,7 +65,8 @@ public class RegFriends extends Activity implements OnClickListener {
                 SpannableStringBuilder fid = (SpannableStringBuilder)editText.getText();
                 String friend_id = fid.toString();
                 task = new MyAsyncTask();
-                task.execute("friends", friend_id);
+                if(checkbox.isChecked() == true){task.execute("friends", friend_id);}
+                else{task.execute("parent", friend_id);}
             }
         });
 
@@ -84,6 +86,12 @@ public class RegFriends extends Activity implements OnClickListener {
         });
         
         createQRcode();
+    }
+
+    public void postExecute(String result){
+        TextView idText = (TextView) this.findViewById(R.id.idText);
+        user_id = Integer.parseInt(result);//実際はここに取得した自分のIDが入る
+        idText.setText(result);
     }
 
     //バーにボタンを追加する

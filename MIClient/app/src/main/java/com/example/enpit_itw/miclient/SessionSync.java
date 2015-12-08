@@ -79,7 +79,7 @@ public class SessionSync {
     }
 
     //友達登録画面にユーザIDを表示させるためだけに作成
-    public static String user_idHttpClient(){
+    public static void user_idHttpClient(DefaultHttpClient httpClient){
         String cookie = CookieManager.getInstance().getCookie(COOKIE_URL);
         Log.v("cookie : ", cookie);
         String[] cookies = cookie.split(";");
@@ -90,9 +90,13 @@ public class SessionSync {
             String value = cookieSet[1];
             Log.v("SessionSync", "session cookie name : " + key + " <> " + value);
             if (!SESSID.equals(key)) {
-                return value;
+                continue;
             }
+            BasicClientCookie bCookie = new BasicClientCookie(key, value);
+            bCookie.setDomain(COOKIE_DOMAIN);
+            bCookie.setPath("/");
+            CookieStore store = httpClient.getCookieStore();
+            store.addCookie(bCookie);
         }
-        return "Fault";
     }
 }
