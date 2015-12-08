@@ -104,6 +104,7 @@ public class MainActivity extends Activity{
             case R.id.menu_reg:
                 // 編集画面への遷移処理
                 Intent edit_intent = new Intent(MainActivity.this, RegFriends.class);
+                //edit_intent.putExtra("user_id", user_id);
                 startActivity(edit_intent);
                 break;
             default:

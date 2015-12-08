@@ -29,7 +29,6 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
 
     private static final String url = "http://192.168.1.64/position_registor.php";
     private static final String urlF = "http://192.168.1.64/friend_registor.php";
-    private static final String urlP = "http://192.168.1.64/parent_registor.php";
 
 
     List<NameValuePair> nameValuePair;
@@ -70,13 +69,8 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
             params.add(new BasicNameValuePair("lon", contents[2]));
             params.add(new BasicNameValuePair("date", contents[3]));
             //params.add(new BasicNameValuePair("user_id", contents[4]));
-        }else if(contents[0] == "parent"){
-            Log.d(TAG, "doInBackground - " + contents[1]);
-            post = new HttpPost(urlP);
-            SessionSync.webView2HttpClient(httpClient);
-
-            params.add(new BasicNameValuePair("parent_id", contents[1]));
-        }else{
+        }
+        else{
             Log.v(TAG, "contents error!");
             return -1;
         }
