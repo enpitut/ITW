@@ -16,15 +16,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="top|left"
-        android:hint="ユーザIDを入力してください" />
+        android:hint="@string/id" />
 
-    <Button
-        android:id="@+id/button2"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="送信"
-        android:hint="OK" />
+        android:layout_gravity="center_horizontal">
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="送信"
+            android:hint="@string/zxing_button_ok" />
+
+        <CheckBox
+            android:id="@+id/parent_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="親子登録" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/qr_image"
@@ -39,5 +49,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="QRコードリーダー"/>
+        android:text="QRコードリーダー" />
 </LinearLayout>
