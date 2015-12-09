@@ -65,8 +65,8 @@ public class RegFriends extends Activity implements OnClickListener, GetId.Async
                 SpannableStringBuilder fid = (SpannableStringBuilder)editText.getText();
                 String friend_id = fid.toString();
                 task = new MyAsyncTask();
-                if(checkbox.isChecked() == true){task.execute("friends", friend_id);}
-                else{task.execute("parent", friend_id);}
+                if(checkbox.isChecked() == true){task.execute("friends", friend_id, String.valueOf(user_id));}
+                else{task.execute("parent", friend_id, String.valueOf(user_id));}
             }
         });
 

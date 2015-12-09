@@ -2,13 +2,12 @@
   $dsn = 'mysql:dbname=enpit2015_ITW;host=localhost;charset=utf8';
   $user = 'root';
   $password = 'enPiT2015ITW';
-  session_start();
 
   if(!isset($_POST["parent_id"])){$_POST["parent_id"]="";}
-  if(!isset($_SESSION["Visitor"]["id"])){$_SESSION["Visitor"]["id"]="";}
+  if(!isset($_POST["user_id"])){$_POST["user_id"]="";}
 
-  $user_id = htmlspecialchars($_SESSION["Visitor"]["id"]);
   $parentid = htmlspecialchars($_POST["parent_id"]);
+  $user_id = htmlspecialchars($_POST["user_id"]);
 
   try{
     $dbh = new PDO($dsn, $user, $password);

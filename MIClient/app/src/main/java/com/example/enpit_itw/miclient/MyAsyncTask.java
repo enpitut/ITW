@@ -57,10 +57,9 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
         if(contents[0] == "friends") {
             Log.d(TAG, "doInBackground - " + contents[1]);
             post = new HttpPost(urlF);
-            SessionSync.webView2HttpClient(httpClient);
 
             params.add(new BasicNameValuePair("friend_id", contents[1]));
-            //params.add(new BasicNameValuePair("user_id", contents[2]));
+            params.add(new BasicNameValuePair("user_id", contents[2]));
         }else if(contents[0] == "position"){
             Log.d(TAG, "doInBackground - " + contents[1] + contents[2]);
             post = new HttpPost(url);
@@ -73,9 +72,9 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
         }else if(contents[0] == "parent"){
             Log.d(TAG, "doInBackground - " + contents[1]);
             post = new HttpPost(urlP);
-            SessionSync.webView2HttpClient(httpClient);
 
             params.add(new BasicNameValuePair("parent_id", contents[1]));
+            params.add(new BasicNameValuePair("user_id", contents[2]));
         }else{
             Log.v(TAG, "contents error!");
             return -1;
@@ -87,7 +86,6 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
 
             byteArrayOutputStream = new ByteArrayOutputStream();
             res.getEntity().writeTo(byteArrayOutputStream);
-
         }
         catch(Exception e){
             Log.v("MyAsyncTask", e.toString());
