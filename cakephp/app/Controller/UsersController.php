@@ -23,7 +23,7 @@ class UsersController extends AppController
 
         $userdata = $this->User->find('all',
             array(
-                'conditions' => array('user.parentid' => 1)
+                'conditions' => array('user.parentid' => $this->Session->read('Visitor.id'))
             )
         );
 
@@ -145,6 +145,19 @@ class UsersController extends AppController
 	public function parent() {
         $this->set('user', $this->Auth->user());
         $this->layout = 'indexLayout';
+        $this->Session->write('Visitor.id',$this->Auth->user('id'));
+
+        $userdata = $this->User->find('all',
+            array(
+                'conditions' => array('user.parentid' => $this->Session->read('Visitor.id'))
+            )
+        );
+        $this->set("userdata", $userdata);
+        if($this->request->is('post') && $this->User->validates())
+            {
+            $this->User->save($this->request->data);
+            $this->redirect('parent');
+        }
 	}
 
 

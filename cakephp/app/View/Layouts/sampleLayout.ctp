@@ -26,7 +26,9 @@
     <?php echo $this->Html->charset(); ?>
     <?php echo $this->Html->meta('icon');?>
     <?php echo $this->fetch('meta');?>
-    <?php echo $this->Html->css('base-style.css'); ?>
+    <?php echo $this->Html->css('footable.standalone'); ?>
+    
+    <?php echo $this->Html->css('base-style'); ?>
     <?php echo $this->fetch('css');?>
 </head>
 <body>
@@ -59,6 +61,8 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <?php echo $this->Html->script('jquery.sidr.min'); ?>
     <?php echo $this->Html->script('bootstrap.min'); ?>
+    <?php echo $this->Html->script('footable.min'); ?>
+
     <?php echo $this->fetch('script'); ?>
 
 </body>

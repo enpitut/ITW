@@ -29,6 +29,9 @@
     <?php echo $this->fetch('meta');?>
     <?php echo $this->Html->css('base-style.css'); ?>
     <?php echo $this->Html->css('jquery.sidr.light'); ?>
+    <?php echo $this->Html->css('footable.bootstrap'); ?>
+    <?php echo $this->Html->css('reveal'); ?>
+
     <?php echo $this->fetch('css');?>
 </head>
 
@@ -59,10 +62,12 @@
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <?php echo $this->Html->script('http://code.jquery.com/jquery.min.js'); ?>
+        <?php echo $this->Html->script('http://code.jquery.com/jquery-migrate-1.2.1.min.js'); ?>
         <?php echo $this->Html->script('jquery.sidr.min'); ?>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <?php echo $this->Html->script('bootstrap.min'); ?>
-
+        <?php echo $this->Html->script('footable'); ?>
+        <?php echo $this->Html->script('jquery.reveal'); ?>
         <?php echo $this->fetch('script'); ?>
         <?php echo $this->fetch('content'); ?>
     </body>

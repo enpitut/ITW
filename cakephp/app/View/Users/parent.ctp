@@ -1,105 +1,78 @@
 <html>
 <head>
+
 </head>
-<body>
-    <div class="text-center container">
-      <div class="
-      col-xs-offset-1 col-sm-offset-1 col-md-offset-1
-      col-xs-2 col-sm-7 col-md-7">
-      <?php
-      echo $this->Form->create('BoostCake', array(
-        'inputDefaults' => array(
-            'div' => 'form-group',
-            'label' => false,
-            'wrapInput' => false,
-            'class' => 'form-control'
-            ),
-        'class' => 'well form-inline'
-        ));
-		///ここに，配列に入っているフレンドをすべて表示
-      $num = 9;
-      $count=0;
-      print('<p>子供の名前情報など'.$count.'</p>');
 
-      print('<form>');
-      print('<input type="button" value="1" onclick="entryPlan(0)">');
-      print('<input type="button" value="2" onclick="entryPlan(1)">');
-      print('</form>');
+<table class="table" style="margin-right : auto;margin-left : auto;width : auto">
+    <thead>
+        <tr>
+            <th>アイコン</th>
+            <th>名前</th>
+        </tr>
+    </thead>
 
-
-      $this->Form->end();
-
-      echo '<br>'.$this->Html->link(
-        'メイン画面へ..',
-        './	index'
-        );
-        ?>
-    </div>
-
-
-    <div class="
-    col-xs-offset-1 col-sm-offset-1 col-md-offset-1
-    col-xs-1 col-sm-3 col-md-3">
-    <?php
-    echo $this->Form->create('BoostCake', array(
-        'inputDefaults' => array(
-            'div' => 'form-group',
-            'label' => false,
-            'wrapInput' => false,
-            'class' => 'form-control'
-            ),
-        'class' => 'well form-inline'
-        ));
-
-    print(
-        $this->Form->create('Parent') .
-        $this->Form->hidden('user_id',array('value' => $user['id'])).
-        $this->Form->input('friendsid', array(
-            'label'=>false,
-            'placeholder' => '子供のユーザID',
-            'class'=>'form-control'
-            )) .
-        $this->Form->input('friendsid', array(
-            'label'=>false,
-            'placeholder' => '子供のパスワード',
-            'class'=>'form-control'
-            )) .
-
-        $this->Form->submit('登録', array(
-            'div' => 'form-group',
-            'class' => 'btn btn-default'
-            )));
-
-    $this->Form->end();
+    <tbody>
+        <?php
+        foreach ($userdata as $dat) {
+            echo "<tr>";
+            echo "<td>".$this->Html->image("marker/".$dat['User']['imgpath'],array('width'=>'50','height'=>'50'))."</td>";
+            echo "<td>".$dat['User']['username']."</td>";
+            echo "<td><a>"."<span class='glyphicon glyphicon-remove'></span>"."</a></td>";
+            echo "</tr>";
+        }
+        echo "<tr>
+        <td colspan=1><a id='#resistmenu' href='#registmenu' data-reveal-id='registmenu'>"."<span class='glyphicon glyphicon-plus'></span> 追加"."</a></td>
+    </tr>";
     ?>
-    <script>
-
-
-      function entryChange1(){
-       radio = document.getElementById('entryPlan') 
-       if(radio==0) {
-			//フォーム
-            document.getElementById('1stBox').style.display = "";
-            document.getElementById('2ndBox').style.display = "none";
-        }else if(radio==1) {
-				//フォーム
-				document.getElementById('1stBox').style.display = "none";
-				document.getElementById('2ndBox').style.display = "";
-			}
-
-		}
-
-	</script>
+</tbody>
+</table>
+<script type="text/javascript">
+    jQuery(function($){
+        $('.table').footable(
+            breakpoints: {
+                phone: 480,
+                tablet: 800
+            });
+    });
+</script>
 
 
 
 
+<body>
 
+<div id="registmenu" class="reveal-modal" data-reveal>
+<h2>登録</h2>
 
-
+<?php
+echo $this->Session->read('Visitor.id');
+        echo $this->Form->create('BoostCake', array(
+            'inputDefaults' => array(
+                'div' => 'form-group',
+                'label' => false,
+                'wrapInput' => false,
+                'class' => 'form-control'
+            ),
+            'class' => 'well form-inline'
+        ));
+            echo $this->Form->create('User');
+            echo $this->Form->input('username', array(
+                'label'=>false,
+                'placeholder' => 'ユーザ名',
+                'class'=>'form-control'
+            ));
+            echo $this->Form->input('password', array(
+                'label'=>false,
+                'placeholder' => 'パスワード',
+                'class'=>'form-control'
+            ));
+            echo $this->Form->hidden('parentid' ,array('value' => $this->Session->read('Visitor.id')));
+            echo $this->Form->submit('登録', array(
+                'div' => 'form-group',
+                'class' => 'btn btn-de  fault'
+            ));
+            echo $this->Form->end();
+?>
 </div>
-</div>
-
-
 </body>
 </html>

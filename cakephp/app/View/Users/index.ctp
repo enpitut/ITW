@@ -14,28 +14,29 @@ header('Cache-Control: no-cache');?>
     </style>
     <?php echo $this->Html->script('MyMap.js'); ?>
 </head>
+
 <body>
-    <a id="simple-menu">Toggle menu</a>
+    <a id="menu">一覧</a>
 
     <div id="sidr">
         <!-- Your content -->
         <ul>
             <?php
             foreach ($userdata as $dat) {
-                echo "<li><a onclick=panTo({$dat['position']['longitude']},{$dat['position']['latitude']})>{$dat['User']['username']}</a></li>";
+                echo "<li><a onclick=panTo({$dat['position']['longitude']},{$dat['position']['latitude']})>{$this->Html->image("marker/".$dat['User']['imgpath'],array('width'=>'30','height'=>'30'))}　{$dat['User']['username']}</a></li>";
             }
             ?>
         <br>
-        <li><a href="#" onclick="jQuery.sidr('close', 'sidr');">閉じる</a></li>
+        <li><a href="#" onclick="jQuery.sidr('close', 'sidr');"><font size="4"><i class='glyphicon glyphicon-remove'></i> 閉じる</font></a></li>
         </ul>
 
     </div>
     <script>
         $(document).ready(function() {
-          $('#simple-menu').sidr({
+          $('#menu').sidr({
             name: 'sidr',
-            side: 'left',//panelを右側から表示
-            displace: false//panelを押し出すのではなく重ねる
+            side: 'left',
+            displace: false
         });
       });
     </script>
