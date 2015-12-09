@@ -40,6 +40,8 @@ public class RegFriends extends Activity implements OnClickListener, GetId.Async
     MyAsyncTask task;
     GetId task2;
     CheckBox checkbox;
+	String USERID=null;
+	EditText editText;
     
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -61,9 +63,12 @@ public class RegFriends extends Activity implements OnClickListener, GetId.Async
                 //処理を書く
                 Log.v("event", "push button!");
                 //Toast.makeText(this, "ボタンがクリックされました", Toast.LENGTH_SHORT).show();
-                EditText editText = (EditText) findViewById(R.id.editText);
+                editText = (EditText) findViewById(R.id.editText);
                 SpannableStringBuilder fid = (SpannableStringBuilder)editText.getText();
                 String friend_id = fid.toString();
+            	while(friend_id.substring(0,1) == "0"){
+            		if(friend_id.length() > 1){friend_id = friend_id.substring(1);}
+            	}
                 task = new MyAsyncTask();
                 if(checkbox.isChecked() == true){task.execute("friends", friend_id, String.valueOf(user_id));}
                 else{task.execute("parent", friend_id, String.valueOf(user_id));}
@@ -91,8 +96,8 @@ public class RegFriends extends Activity implements OnClickListener, GetId.Async
     public void postExecute(String result){
         TextView idText = (TextView) this.findViewById(R.id.idText);
         user_id = Integer.parseInt(result);//実際はここに取得した自分のIDが入る
-    	result = String.format("%1$09d", user_id);//9桁にそろえる(先頭0埋め)
-        idText.setText(result.substring(0,3) + " " + result.substring(3,6) + " " + result.substring(6,9));
+    	USERID = String.format("%1$09d", user_id);//9桁にそろえる(先頭0埋め)
+        idText.setText(USERID.substring(0,3) + " " + USERID.substring(3,6) + " " + USERID.substring(6,9));
     }
 
     //バーにボタンを追加する
@@ -125,7 +130,7 @@ public class RegFriends extends Activity implements OnClickListener, GetId.Async
     private void createQRcode() {
         Bitmap qr = null;
         try{
-            qr = createQRCodeByZxing("http://google.co.jp", 600);
+            qr = createQRCodeByZxing("####################"+USERID, 600);
         }catch (WriterException e){
             Log.d("createQRCode", "error:", e);
         }
@@ -191,8 +196,8 @@ public class RegFriends extends Activity implements OnClickListener, GetId.Async
         super.onActivityResult(requestCode, resultcode, data);
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultcode, data);
         if(scanResult != null){
-            EditText qrTextView = (EditText) findViewById(R.id.editText);
-            qrTextView.setText(scanResult.getContents());
+            editText = (EditText) findViewById(R.id.editText);
+            editText.setText(scanResult.getContents().substring(20));
             Log.d("scan", "==-----: " + scanResult.getContents());
         }
     }
