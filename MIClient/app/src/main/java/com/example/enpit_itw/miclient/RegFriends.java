@@ -91,7 +91,8 @@ public class RegFriends extends Activity implements OnClickListener, GetId.Async
     public void postExecute(String result){
         TextView idText = (TextView) this.findViewById(R.id.idText);
         user_id = Integer.parseInt(result);//実際はここに取得した自分のIDが入る
-        idText.setText(result);
+    	result = String.format("%1$09d", user_id);//9桁にそろえる(先頭0埋め)
+        idText.setText(result.substring(0,3) + " " + result.substring(3,6) + " " + result.substring(6,9));
     }
 
     //バーにボタンを追加する
