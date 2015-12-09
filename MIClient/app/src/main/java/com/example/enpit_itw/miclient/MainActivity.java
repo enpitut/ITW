@@ -33,7 +33,7 @@ public class MainActivity extends Activity{
     BufferedWriter writer;
     String user_id;
     private ShareActionProvider mShareActionProvider;
-    final String url = "http://192.168.1.64/cakephp/Users/login";
+    final String url = "http://192.168.1.58/cakephp/Users/login";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

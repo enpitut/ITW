@@ -1,4 +1,4 @@
-package com.example.enpit_itw_esaka.myapplication2;
+package com.example.enpit_itw.miclient;
 
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -24,7 +24,7 @@ public class GetId extends AsyncTask<String, Integer, Integer> implements Dialog
     HttpResponse res = null;
     Integer user_id = null;
 
-    private static final String url = "http://192.168.1.64/getid.php";
+    private static final String url = "http://192.168.1.58/getid.php";
 
     //RegFriendsへのコールバック用interface
     public interface AsyncTaskCallback{

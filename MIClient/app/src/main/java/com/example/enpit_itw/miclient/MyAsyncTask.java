@@ -27,9 +27,9 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
 
     private Activity m_Activity;
 
-    private static final String url = "http://192.168.1.64/position_registor.php";
-    private static final String urlF = "http://192.168.1.64/friend_registor.php";
-    private static final String urlP = "http://192.168.1.64/parent_registor.php";
+    private static final String url = "http://192.168.1.58/position_registor.php";
+    private static final String urlF = "http://192.168.1.58/friend_registor.php";
+    private static final String urlP = "http://192.168.1.58/parent_registor.php";
 
 
     List<NameValuePair> nameValuePair;
@@ -63,7 +63,7 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
         }else if(contents[0] == "position"){
             Log.d(TAG, "doInBackground - " + contents[1] + contents[2]);
             post = new HttpPost(url);
-            SessionSync.webView2HttpClient(httpClient);
+           // SessionSync.webView2HttpClient(httpClient);
 
             params.add(new BasicNameValuePair("lat", contents[1]));
             params.add(new BasicNameValuePair("lon", contents[2]));
@@ -81,6 +81,7 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Integer> implements 
         }
 
         try {
+            SessionSync.webView2HttpClient(httpClient);
             post.setEntity(new UrlEncodedFormEntity(params, "utf-8"));
             res = httpClient.execute(post);
 

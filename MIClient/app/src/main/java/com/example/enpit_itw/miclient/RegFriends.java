@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,7 +56,7 @@ public class RegFriends extends Activity implements OnClickListener, GetId.Async
         idText.setText(Integer.toString(user_id));
         */
 
-        checkbox = (CheckBox) findViewById(R.id.checkbox);
+
         Button button2 = (Button)findViewById(R.id.button2);
         button2.setOnClickListener(new OnClickListener() {
             @Override
@@ -70,8 +71,13 @@ public class RegFriends extends Activity implements OnClickListener, GetId.Async
             		if(friend_id.length() > 1){friend_id = friend_id.substring(1);}
             	}
                 task = new MyAsyncTask();
-                if(checkbox.isChecked() == true){task.execute("friends", friend_id, String.valueOf(user_id));}
-                else{task.execute("parent", friend_id, String.valueOf(user_id));}
+                checkbox = (CheckBox) findViewById(R.id.parent_check);
+                if(checkbox.isChecked() == true){
+                    task.execute("parent", friend_id, String.valueOf(user_id));
+                }
+                else{
+                    task.execute("friends", friend_id, String.valueOf(user_id));
+                }
             }
         });
 

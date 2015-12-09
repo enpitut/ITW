@@ -80,7 +80,7 @@ public class LocationSendingService  extends Service implements LocationListener
         Time time = new Time("Asia/Tokyo");
         time.setToNow();
         String date = time.year + "-" + (time.month+1) + "-" + time.monthDay + " " + time.hour + ":" + time.minute + ":" + time.second;
-        Toast.makeText(this, Lat + " ," + Lon, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, Lat + " ," + Lon, Toast.LENGTH_SHORT).show();
 
         task= new MyAsyncTask();
         task.execute("position", Lat, Lon, date);
