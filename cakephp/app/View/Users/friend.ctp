@@ -4,11 +4,7 @@
 </head>
 <body>
 
-
-<div class="text-center container" style=" position: relative; top: 50%; transform: translateY(-50%);">
-
-
-
+<div class="text-center container" style="position: relative; top: 300px; transform: translateY(-50%);">
     <div class="
      col-xs-offset-1 col-sm-offset-1 col-md-offset-1
      col-xs-2 col-sm-7 col-md-7">

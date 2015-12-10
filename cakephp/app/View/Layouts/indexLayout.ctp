@@ -51,9 +51,9 @@
 
                 <div class="collapse navbar-collapse  navbar-inversez" id="navbarEexample1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><?php print($this->Html->link('メイン', 'index')); ?></li>
-                        <li><?php print($this->Html->link('おともだち', 'friend')); ?></li>
-                        <li><?php print($this->Html->link('おうちのかた', 'parent')); ?></li>
+                        <li><?php if(1===$this->Session->read('isParent'))print($this->Html->link('位置情報', 'index')); ?></li>
+                        <li><?php if(0===$this->Session->read('isParent'))print($this->Html->link('ともだち', 'friend')); ?></li>
+                        <li><?php if(1===$this->Session->read('isParent'))print($this->Html->link('設定', 'parent')); ?></li>
                         <li><?php print($this->Html->link('ログアウト', 'logout')); ?></li>
                     </ul>
                 </div>
