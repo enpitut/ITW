@@ -153,14 +153,13 @@ class UsersController extends AppController
             )
         );
         $this->set("userdata", $userdata);
-        if($this->request->is('post') && $this->User->validates())
-            {
-            $this->User->save($this->request->data);
+        //var_dump($this->request->data);
+        if($this->request->is('post')){
+            if(isset($this->request->data['User']))$this->User->save($this->request->data);
+            if(isset($this->request->data['delete']))$this->User->delete($this->request->data['delete']['deleteid']);
             $this->redirect('parent');
         }
 	}
-
-
 
     public function register(){
         //$this->requestにPOSTされたデータが入っている
