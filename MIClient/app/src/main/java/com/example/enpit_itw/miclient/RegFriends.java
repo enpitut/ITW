@@ -104,6 +104,7 @@ public class RegFriends extends Activity implements OnClickListener, GetId.Async
         user_id = Integer.parseInt(result);//実際はここに取得した自分のIDが入る
     	USERID = String.format("%1$09d", user_id);//9桁にそろえる(先頭0埋め)
         idText.setText(USERID.substring(0,3) + " " + USERID.substring(3,6) + " " + USERID.substring(6,9));
+        createQRcode();
     }
 
     //バーにボタンを追加する
