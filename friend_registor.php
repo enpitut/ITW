@@ -30,6 +30,11 @@
         $stmt->bindValue(':friend_id', $friend_id, PDO::PARAM_INT);
         $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
+        $insert_sql = 'INSERT INTO friends (user_id, friendsid) values (:friend_id, :user_id)';
+        $stmt = $dbh->prepare($insert_sql);
+        $stmt->bindValue(':friend_id', $friend_id, PDO::PARAM_INT);
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
       }else{
         $update_sql = 'UPDATE friends SET friendsid = :friend_id WHERE user_id=:user_id';
         $stmt = $dbh->prepare($update_sql);
